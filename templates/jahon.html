@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+	Jahon News
+{% endblock %}
+
+{% block content %}
+    <section>
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8 ">
+        <div class="content">
+            <ul>
+                {% for new in jahon_news %}
+
+
+
+                <li style="padding: 10px">
+                     <div class="media wow fadeInDown "> <a href="{{ new.get_absolute_url }}" class="media-left"> <img alt="" src="{{ new.image.url }}" > </a>
+                    <div class="media-body"> <a href="{{ new.get_absolute_url }}" class="catg_title"><h3> {{ new.title | truncatewords:10 }}</h3></a> </div>
+                  </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        </div>
+    </div>
+    </section>
+
+{% endblock %}
