@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, TemplateView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, TemplateView, UpdateView, DeleteView
 
 from .models import Category, News
 from .forms import ContactForm
@@ -125,3 +126,14 @@ class TexnologyNewsView(ListView):
     def get_queryset(self):
         news = News.published.all().filter(category__name='Fan-texnika')
         return news
+
+class NewsUpdateView(UpdateView):
+    model = News
+    fields = ('title', 'body', 'image', 'category', 'status')
+    template_name = 'news_edit.html'
+
+
+class NewsDeleteView(DeleteView):
+    model = News
+    template_name = 'news_delete.html'
+    success_url = reverse_lazy('home')
